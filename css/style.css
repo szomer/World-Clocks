@@ -1,0 +1,110 @@
+/* Google Fonts Import */
+@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=IBM+Plex+Serif:ital,wght@0,300;0,400;0,700;1,400;1,700&family=Staatliches&display=swap');
+
+/* General Styling */
+body {
+  margin: 0px;
+
+  /* Sticky footer */
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+
+  /* Wallpaper */
+  background-color: rgb(26, 28, 29);
+	background-image: url('/images/wallpaper.jpg');
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-size: cover;
+}
+
+
+/* Header Styling */
+header {
+  padding: 0px;
+}
+
+  /* Wrapper containing all header content */
+  #headerWrapper {
+    background-color: cadetblue;
+    height: 80px;
+  }
+    /* Company logo placement */
+    #companyLogo {
+      text-align: left;
+      padding: 5px;
+      position: relative;
+      margin-top: -80px;
+      width: fit-content;
+    }
+      #icon{
+        height:70px;
+      }
+    /* Navigation menu */
+    #navigation {
+      text-align: center;
+      height: 60px;
+      padding-top: 20px;
+    }
+      ul {
+        margin: 0px;
+        padding: 0px;
+        overflow: hidden;
+        display: inline-block;
+        list-style-type: none;
+        height: 60px;
+      }
+      li {
+        float: left;
+        font-size: 20px;
+        padding:0px 20px;
+      }
+      li a {
+        display: block;
+        text-align: center;
+        padding: 14px 16px;
+        height: 60px;
+        color: white;
+        text-decoration: none;
+      }
+      li a:hover {
+        color: black;
+      }
+
+
+/* Content Styling */
+#contentContainer {
+  padding: 0px;
+
+  /* Sticky footer */
+  flex: 1;
+}
+  /* Left section */
+  #contentLeft {
+    float: left;
+    width: 20%;
+    overflow: hidden;
+    min-width: 5px;
+    min-height: 5px;
+  }
+  /* Main Section */
+  main {
+    padding: 0px;
+    width: 60%;
+    overflow: hidden;
+    background-color: grey;
+  } 
+    /* Wrapper for main content section */
+    #contentWrapper {
+      padding: 0px;
+    }
+
+
+/* Footer Styling */
+footer {
+  background-color: cadetblue;
+}
+  /* Wrapper containing all footer content */
+  #footerWrapper {
+    text-align: center;
+  }
