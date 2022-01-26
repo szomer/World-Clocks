@@ -28,6 +28,7 @@ header {
   #headerWrapper {
     background-color: cadetblue;
     height: 80px;
+    overflow: hidden;
   }
     /* Company logo placement */
     #companyLogo {
@@ -45,6 +46,8 @@ header {
       text-align: center;
       height: 60px;
       padding-top: 20px;
+      min-width: 740px;    
+      background-color: cadetblue;
     }
       ul {
         margin: 0px;
@@ -85,7 +88,7 @@ header {
     width: 20%;
     overflow: hidden;
     min-width: 5px;
-    min-height: 5px;
+    min-height: 1px;
   }
   /* Main Section */
   main {
