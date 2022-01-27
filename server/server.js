@@ -28,7 +28,7 @@ const cors = require('cors');
 const path = require('path');
 
 const ct = require('countries-and-timezones');
-
+const cityTimezones = require('city-timezones');
 
 
 // Create the web app with express
@@ -49,7 +49,7 @@ app.listen(port, () => {
 
 // ACCESSING http://localhost:3000/                         
 app.get('/', (req, res) => { //GET localhost:3000/
-  fs.readFile(__dirname + "/index.html") //Load the HTML file
+  fs.readFile(__dirname + "/serverpage.html") //Load the HTML file
     .then(contents => {
       res.setHeader("Content-Type", "text/html"); //Set content type
       res.writeHead(200); //Status code 200
@@ -64,6 +64,12 @@ app.get('/', (req, res) => { //GET localhost:3000/
 
 // RETRIEVING A SPECIFIC TIMEZONE
 app.get('/timezone', (req, res) => {
-  const timezone = ct.getTimezone('America/Los_Angeles');
-  console.log(timezone);
+  // loop up the city that matches the string sent by the client
+  var lookupCity = cityTimezones.lookupViaCity(req.query.city)
+
+  // look up the time zone related to the found city name
+  const timezone = ct.getTimezone(lookupCity[0].timezone);
+
+  // send the timezone string to to the client
+  res.send(timezone.utcOffsetStr);
 });
