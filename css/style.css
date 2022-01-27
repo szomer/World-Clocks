@@ -73,7 +73,9 @@ header {
       li a:hover {
         color: black;
       }
-
+      nav .active {
+        color: black;
+      }
 
 /* Content Styling */
 #contentContainer {

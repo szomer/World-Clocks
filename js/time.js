@@ -1,10 +1,8 @@
-
-var timezoneText = document.getElementById("timezoneText");
-var lookupString = 'Los Angeles';
-
-
 // Requesting data from server and display in table
 function getTimezone() {
+
+  var timezoneText = document.getElementById("timezoneText");
+  var lookupString = 'Los Angeles';
 
   console.log("data method");
 
