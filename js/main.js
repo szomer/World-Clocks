@@ -1,6 +1,7 @@
 var canvasIds = [];
 var times = [];
 var cities = [];
+var timeType;
 
 var contextHTML;
 
@@ -68,7 +69,7 @@ async function router() {
 
   if (route == '/partials/home.html') {
     // if the route is '/partials/page1.html' load the clocks
-    loadClocks();
+    loadClocks(timeType);
   } else if (route == '/partials.page1.html') {
 
   }
@@ -89,22 +90,47 @@ function makeMenuChoiceActive(route) {
 }
 
 function retrieveSettings() {
-  cities.push('Hong Kong');
+  cities.push('Vancouver');
+  cities.push('Mexico City');
   cities.push('New York');
+  cities.push('Brasilia');
   cities.push('Amsterdam');
+  cities.push('Moscow');
+  cities.push('New Delhi');
+  cities.push('Hong Kong');
+  cities.push('Tokyo');
+  timeType = 'Analog';
 
   contextHTML = '';
 
+  generateHTML();
+}
+
+
+function generateHTML() {
+
+  contextHTML = '';
+
+  // Add each city to the HTML
   for (var i = 0; i < cities.length; i++) {
-    // set time
+
+    // Set time
     getTimezone(cities[i], i);
 
-    // set canvas
-    var can = 'clockcanvas' + i;
-    canvasIds[i] = can;
+    // Generate html for digital time
+    if (timeType == 'Digital') {
+      contextHTML = contextHTML.concat('<p>sample</p>')
 
-    // generated html
-    contextHTML = contextHTML.concat('<div class="block"><h2 id ="blockTitle' + i + '">' + cities[i] + '</h2><h3 id="blockUtc' + i + '">UTC ' + times[i] + '</h3><canvas class="clockcanvas' + i + '"width="250" height="250"></canvas></div>')
+
+    }
+    // Generate html for analog time
+    else {
+      // Set canvas
+      var can = 'clockcanvas' + i;
+      canvasIds[i] = can;
+
+      contextHTML = contextHTML.concat('<div class="block"><h2 id ="blockTitle' + i + '">' + cities[i] + '</h2><h3 id="blockUtc' + i + '">UTC ' + times[i] + '</h3><canvas class="clockcanvas' + i + '"width="250" height="250"></canvas></div>')
+    }
   }
 
   times.filter(n => n);

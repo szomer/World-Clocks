@@ -1,50 +1,61 @@
+
 function loadClocks() {
-  // add canvases to html
+  // set context and time type
   document.getElementById('clocks').innerHTML = contextHTML;
+  document.getElementById('timeType').innerHTML = timeType;
 
-  // arrays
-  var canv = [];
-  var rads = [];
-  var ctxs = [];
+  // DIGITAL TYPE
+  if (timeType == 'Digital') {
 
-  // initialize canvas and measurements for every time
-  for (var x = 0; x < canvasIds.length; x++) {
-    var c = document.getElementsByClassName(canvasIds[x]);
-    var canvas = c[0];
 
-    var ctx = canvas.getContext("2d");
-    var radius = canvas.height / 2;
-    ctx.translate(radius, radius);
-    radius = radius * 0.90
-
-    // store
-    canv[x] = canvas;
-    ctxs[x] = ctx;
-    rads[x] = radius
   }
+  // ANALOG TYPE
+  else {
+    // arrays
+    var canv = [];
+    var rads = [];
+    var ctxs = [];
 
-  // every second draw clocks
-  const interval = setInterval(function () {
+    // initialize canvas and measurements for every time
     for (var x = 0; x < canvasIds.length; x++) {
+      var c = document.getElementsByClassName(canvasIds[x]);
+      var canvas = c[0];
 
-      // Store the current transformation matrix
-      ctxs[x].save();
-      // Use the identity matrix while clearing the canvas
-      ctxs[x].setTransform(1, 0, 0, 1, 0, 0);
-      ctxs[x].clearRect(0, 0, canv[x].width, canv[x].height);
-      // Restore the transform
-      ctxs[x].restore();
+      var ctx = canvas.getContext("2d");
+      var radius = canvas.height / 2;
+      ctx.translate(radius, radius);
+      radius = radius * 0.90
 
-      // Call drawing canvas methods
-      drawTime(ctxs[x], rads[x], times[x]);
-
-      var s = 'blockUtc' + x;
-      document.getElementById(s).innerHTML = 'UTC ' + times[x];
+      // store
+      canv[x] = canvas;
+      ctxs[x] = ctx;
+      rads[x] = radius
     }
-  }, 1000);
+
+    // every second draw clocks
+    const interval = setInterval(function () {
+      for (var x = 0; x < canvasIds.length; x++) {
+
+        // Store the current transformation matrix
+        ctxs[x].save();
+        // Use the identity matrix while clearing the canvas
+        ctxs[x].setTransform(1, 0, 0, 1, 0, 0);
+        ctxs[x].clearRect(0, 0, canv[x].width, canv[x].height);
+        // Restore the transform
+        ctxs[x].restore();
+
+        // Call drawing canvas methods
+        drawTime(ctxs[x], rads[x], times[x]);
+
+        var s = 'blockUtc' + x;
+        document.getElementById(s).innerHTML = 'UTC ' + times[x];
+
+      }
+    }, 1000);
+  }
 }
 
-
+// analog
 function drawTime(ctx, radius, timeOffset) {
   // get current browser time
   var now = new Date();
@@ -71,7 +82,7 @@ function drawTime(ctx, radius, timeOffset) {
   hour = (hour + (timeOffset / 2));
   drawHand(ctx, hour, radius * 0.4, radius * 0.05, '#FFFFFF');
 }
-
+// analog
 function drawHand(ctx, pos, length, width, color) {
   ctx.beginPath();
   ctx.lineWidth = width;
@@ -82,4 +93,18 @@ function drawHand(ctx, pos, length, width, color) {
   ctx.strokeStyle = color;
   ctx.stroke();
   ctx.rotate(-pos);
+}
+
+
+function changeTimeType() {
+  if (timeType == 'Digital') {
+    document.getElementById('timeType').innerHTML = 'Analog';
+    timeType = 'Analog';
+
+  } else {
+    document.getElementById('timeType').innerHTML = 'Digital'
+    timeType = 'Digital'
+  }
+  generateHTML();
+  loadClocks();
 }
