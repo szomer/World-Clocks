@@ -1,3 +1,7 @@
+var canvasIds = [];
+var times = [];
+
+
 // event handling
 // listens to clicks made on body
 // only react if clicked on an 'a' tag
@@ -57,42 +61,89 @@ async function router() {
   if (route == '/partials/home.html') {
     console.log('loading clocks');
 
-    // measurments
-    var canvas = document.getElementById("canvas");
-    var ctx = canvas.getContext("2d");
-    var radius = canvas.height / 2;
-    ctx.translate(radius, radius);
-    radius = radius * 0.90;
 
-    // draw clocks every second
+    canvasIds = ["clockcanvas0", "clockcanvas1", "clockcanvas2", "clockcanvas3", "clockcanvas4"];
+    times = [-2, -1, 0, 1, 2];
+    var canv = [];
+    var rads = [];
+    var ctxs = [];
+
+
+    // initialize canvas and measurements
+    for (var x = 0; x < canvasIds.length; x++) {
+      var c = document.getElementsByClassName(canvasIds[x]);
+      var canvas = c[0];
+
+      var ctx = canvas.getContext("2d");
+      var radius = canvas.height / 2;
+      ctx.translate(radius, radius);
+      radius = radius * 0.90
+
+      // store
+      canv[x] = canvas;
+      ctxs[x] = ctx;
+      rads[x] = radius
+    }
+
+    // every second draw clocks
     const interval = setInterval(function () {
-      drawFace(ctx, radius);
-      drawNumbers(ctx, radius);
-      drawTime(ctx, radius);
+      for (var x = 0; x < canvasIds.length; x++) {
 
-    }, 1000); // every 1 second
+        // Store the current transformation matrix
+        ctxs[x].save();
+        // Use the identity matrix while clearing the canvas
+        ctxs[x].setTransform(1, 0, 0, 1, 0, 0);
+        ctxs[x].clearRect(0, 0, canv[x].width, canv[x].height);
+        // Restore the transform
+        ctxs[x].restore();
+
+        // Call drawing canvas methods
+        drawTime(ctxs[x], rads[x], times[x]);
+      }
+    }, 1000);
   }
 }
 
-// draw clock components
-function drawFace(ctx, radius) {
-  var grad;
-  ctx.beginPath();
-  ctx.arc(0, 0, radius, 0, 2 * Math.PI);
-  ctx.fillStyle = 'white';
-  ctx.fill();
-  grad = ctx.createRadialGradient(0, 0, radius * 0.95, 0, 0, radius * 1.05);
-  grad.addColorStop(0, '#333');
-  grad.addColorStop(0.5, 'white');
-  grad.addColorStop(1, '#333');
-  ctx.strokeStyle = grad;
-  ctx.lineWidth = radius * 0.1;
-  ctx.stroke();
-  ctx.beginPath();
-  ctx.arc(0, 0, radius * 0.1, 0, 2 * Math.PI);
-  ctx.fillStyle = '#333';
-  ctx.fill();
+function drawTime(ctx, radius, timeOffset) {
+  // get current browser time
+  var now = new Date();
+  // get utc time
+  now.toUTCString;
+
+  var hour = now.getHours();
+  var minute = now.getMinutes();
+  var second = now.getSeconds();
+
+
+  // second
+  second = (second * Math.PI / 30);
+  drawHand(ctx, second, radius * 0.9, radius * 0.02, '#0de0dd');
+
+  //minute
+  minute = (minute * Math.PI / 30) + (second * Math.PI / (30 * 60));
+  drawHand(ctx, minute, radius * 0.7, radius * 0.04, '#FFFFFF');
+
+  //hour
+  hour = hour % 12;
+  hour = (hour * Math.PI / 6) +
+    (minute * Math.PI / (6 * 60)) +
+    (second * Math.PI / (360 * 60));
+  hour = (hour + (timeOffset / 2));
+  drawHand(ctx, hour, radius * 0.4, radius * 0.05, '#FFFFFF');
 }
+
+function drawHand(ctx, pos, length, width, color) {
+  ctx.beginPath();
+  ctx.lineWidth = width;
+  ctx.lineCap = "round";
+  ctx.moveTo(0, 0);
+  ctx.rotate(pos);
+  ctx.lineTo(0, -length);
+  ctx.strokeStyle = color;
+  ctx.stroke();
+  ctx.rotate(-pos);
+}
+
 function drawNumbers(ctx, radius) {
   var ang;
   var num;
@@ -110,34 +161,7 @@ function drawNumbers(ctx, radius) {
     ctx.rotate(-ang);
   }
 }
-function drawTime(ctx, radius) {
-  var now = new Date();
-  var hour = now.getHours();
-  var minute = now.getMinutes();
-  var second = now.getSeconds();
-  //hour
-  hour = hour % 12;
-  hour = (hour * Math.PI / 6) +
-    (minute * Math.PI / (6 * 60)) +
-    (second * Math.PI / (360 * 60));
-  drawHand(ctx, hour, radius * 0.5, radius * 0.07);
-  //minute
-  minute = (minute * Math.PI / 30) + (second * Math.PI / (30 * 60));
-  drawHand(ctx, minute, radius * 0.8, radius * 0.07);
-  // second
-  second = (second * Math.PI / 30);
-  drawHand(ctx, second, radius * 0.9, radius * 0.02);
-}
-function drawHand(ctx, pos, length, width) {
-  ctx.beginPath();
-  ctx.lineWidth = width;
-  ctx.lineCap = "round";
-  ctx.moveTo(0, 0);
-  ctx.rotate(pos);
-  ctx.lineTo(0, -length);
-  ctx.stroke();
-  ctx.rotate(-pos);
-}
+
 
 // display menu choice
 function makeMenuChoiceActive(route) {

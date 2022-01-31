@@ -1,11 +1,17 @@
 
-var canvas = document.getElementById("canvas");
-var ctx = canvas.getContext("2d");
-var radius = canvas.height / 2;
-ctx.translate(radius, radius);
-radius = radius * 0.90;
 
-setInterval(drawClock, 1000);
+function startTime(){
+  var canvas = document.getElementById("clockcanvas0");
+  var ctx = canvas.getContext("2d");
+  var radius = canvas.height / 2;
+  ctx.translate(radius, radius);
+  radius = radius * 0.90;
+
+  setInterval(drawClock, 1000);
+}
+
+
+
 
 function drawClock() {
   console.log('refresh method');

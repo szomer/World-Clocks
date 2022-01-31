@@ -47,7 +47,7 @@ header {
       height: 60px;
       padding-top: 20px;
       min-width: 740px;    
-      background-color: cadetblue;
+      background-color: #0de0dd;
     }
       ul {
         margin: 0px;
@@ -97,7 +97,11 @@ header {
     padding: 0px;
     width: 60%;
     overflow: hidden;
-    background-color: grey;
+    background-color: #292929;
+    border-left: solid 2px;
+    border-right: solid 2px;
+    border-bottom: solid 2px;
+    border-color: #0de0dd;
   } 
     /* Wrapper for main content section */
     #contentWrapper {
@@ -107,7 +111,7 @@ header {
 
 /* Footer Styling */
 footer {
-  background-color: cadetblue;
+  background-color: #0de0dd;
 }
   /* Wrapper containing all footer content */
   #footerWrapper {

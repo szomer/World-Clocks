@@ -1,0 +1,56 @@
+#clocksContent {
+  padding-left: 25px;
+  padding-right: 25px;
+  padding-top: 20px;
+  padding-bottom: 30px;
+  min-width: 610px;
+  max-width: 1140px;
+}
+  #clocksTitle {
+    text-align: left;
+    color:white;
+    font-size: 20px;
+  }
+
+  #timeType{
+    color: white;
+  }
+
+  #timeType:hover{
+    color: #0de0dd;
+  }
+
+  hr{
+    margin-bottom: 40px;
+  }
+  .clocks {
+    width: 800px;
+  }
+  h2{
+    color: white;
+    text-align: center;
+    padding:0px;
+    margin:0px;
+  }
+  h3{
+    color: grey;
+    text-align: center;
+    margin:0px;
+    padding:0px;
+    font-weight: normal;
+    font-size: 15px;
+  }
+  .block{
+    width: 250px;
+    height: 300px;
+    float: left;
+	  background-image: url('/images/clock2.png');
+	  background-repeat: no-repeat;
+    background-position-y: 50px;
+    background-size: 250px;
+    margin-bottom: 30px;
+    margin-left: 15px;
+    margin-right: 14px;
+  }
+
+  
