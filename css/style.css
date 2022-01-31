@@ -67,14 +67,14 @@ header {
         text-align: center;
         padding: 14px 16px;
         height: 60px;
-        color: white;
+        color: #292929;
         text-decoration: none;
       }
       li a:hover {
-        color: black;
+        color: white;
       }
       nav .active {
-        color: black;
+        color: white;
       }
 
 /* Content Styling */
