@@ -1,4 +1,5 @@
 var canvasIds = [];
+var digIds = [];
 var times = [];
 var cities = [];
 var timeType;
@@ -99,7 +100,7 @@ function retrieveSettings() {
   cities.push('New Delhi');
   cities.push('Hong Kong');
   cities.push('Tokyo');
-  timeType = 'Analog';
+  timeType = 'Digital';
 
   contextHTML = '';
 
@@ -119,9 +120,11 @@ function generateHTML() {
 
     // Generate html for digital time
     if (timeType == 'Digital') {
-      contextHTML = contextHTML.concat('<p>sample</p>')
 
+      var dig = 'clockDigital' + i;
+      digIds[i] = dig;
 
+      contextHTML = contextHTML.concat('<div class="blockDigital"><h2 id ="blockTitle'+ i +'">'+ cities[i] +'</h2><h3 id="blockUtc'+ i+'">UTC '+ times[i] +'</h3><div id="clockDigital'+ i +'" class="clockDigital"></div></div>');
     }
     // Generate html for analog time
     else {

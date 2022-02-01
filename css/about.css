@@ -1,4 +1,4 @@
-#settingsContent {
+#aboutContent {
   padding-left: 25px;
   padding-right: 25px;
   padding-bottom: 30px;
@@ -7,7 +7,7 @@
 }
 
   /* Title */
-  #settingsTitle {
+  #aboutTitle {
     text-align: left;
     color:white;
     font-size: 22px;

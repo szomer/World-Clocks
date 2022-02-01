@@ -1,42 +1,63 @@
+@font-face {
+ font-family:'digital7';
+ src: url('/resources/digital-7.ttf');
+}
+/* digital7, Bebas Neue, Elsie, Lobster Two, Obitron, Stint Ultra Condensed, Yanone Kaffeesatz */
+
+
 #clocksContent {
   padding-left: 25px;
   padding-right: 25px;
-  padding-top: 20px;
   padding-bottom: 30px;
   min-width: 610px;
   max-width: 1140px;
 }
+
+  /* Title */
   #clocksTitle {
     text-align: left;
     color:white;
-    font-size: 20px;
+    font-size: 22px;
+    font-family: 'Bebas Neue', sans-serif;
   }
 
+  /* Switch time type button */
   #timeType{
     color: white;
+    font-family: 'Bebas Neue', sans-serif;
   }
-
   #timeType:hover{
     color: #0de0dd;
+    cursor: pointer;
   }
 
   hr{
-    margin-bottom: 40px;
+    margin-bottom: 50px;
   }
+
+  /* Clock title*/
   h2{
     color: white;
     text-align: center;
     padding:0px;
     margin:0px;
+    font-size: 25px;
+    font-family: 'Source Serif Pro', serif;
+    font-weight: 400;
   }
+
+  /* Utc title */
   h3{
-    color: grey;
+    color: rgb(165, 165, 165);
     text-align: center;
     margin:0px;
     padding:0px;
-    font-weight: normal;
-    font-size: 15px;
+    font-weight: lighter;
+    font-size: 13px;
+    font-family: sans-serif;
   }
+
+  /* Analog Clock */
   .block{
     width: 250px;
     height: 300px;
@@ -50,4 +71,28 @@
     margin-right: 14px;
   }
 
-  
+  /* Digital Clock */
+  .blockDigital{
+    width: 250px;
+    height: 164px;
+    float: left;
+    margin-bottom: 50px;
+    margin-left: 15px;
+    margin-right: 14px;
+    font-family: sans-serif;
+  }
+  .clockDigital {
+    margin-top: 10px;
+    padding-top: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    line-height: 55px;
+    width: 230px;
+    color: #292929;
+    text-align: center;
+    font-size: 60px;
+    font-family: 'digital7', monospace;
+    letter-spacing: 7px;
+    background-color: grey;
+    border-radius: 15px 15px 15px 15px;
+  }
