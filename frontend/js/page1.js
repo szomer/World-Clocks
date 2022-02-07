@@ -1,7 +1,6 @@
 // Load settings contents
 function loadSettings() {
   populateTable();
-  setSettings();
 }
 
 // Add the cities and their timezone to the table
@@ -22,18 +21,22 @@ function populateTable() {
   }
 }
 
-// Set settings to server
+// Update new settings on server
 function setSettings() {
-  var arr = ['Vancouver', 'Den Haag'];
+  var arr = ['Vancouver', 'New York', 'Tokyo'];
   var newTime = 'Analog';
 
   // GET request
   $.ajax({
     type: 'GET', //type of request
     url: '/api/config', //url to server
-    data: { test: JSON.stringify(arr), time: newTime},
+    data: {
+      data1: (arr),
+      data2: newTime
+    },
     // convert array to string
   }).done(function (result) {
+    console.log(result);
 
   }).fail(function (xhr, status, error) {
     // Request error

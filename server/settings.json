@@ -1,4 +1,1 @@
-{
-  "type": "Analog",
-  "cities": ["Hong Kong", "Amsterdam"]
-}
+{"type":"Analog","cities":["Vancouver","New York","Tokyo"]}

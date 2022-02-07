@@ -22,7 +22,7 @@
 // Used for req, URL paths, set web app settings
 const express = require('express');
 // Used to load the HTML file [readFile()]
-const fs = require('fs').promises;
+const fs = require('fs');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const path = require('path');
@@ -54,13 +54,13 @@ app.listen(port, () => {
 // RETRIEVING A SPECIFIC TIMEZONE
 app.get('/api/timezone', (req, res) => {
   try {
-    // loop up the city that matches the string sent by the client
+    // Loop up the city that matches the string sent by the client
     var lookupCity = cityTimezones.lookupViaCity(req.query.city)
 
-    // look up the time zone related to the found city name
+    // Look up the time zone related to the found city name
     const timezone = ct.getTimezone(lookupCity[0].timezone);
 
-    // send the timezone string to to the client
+    // Send the timezone string to to the client
     res.send(timezone.utcOffsetStr);
 
   } catch (err) { // In case of error
@@ -72,31 +72,30 @@ app.get('/api/timezone', (req, res) => {
 
 // CHANGING SETTINGS FILE
 app.get('/api/config', (req, res) => {
-  try {
-    // Retrieve new cities
-    var data = req.query.cities;
-    var data2 = req.query.time;
 
-    var obj = {
-      table: []
-    };
-    obj.table.push({ data, data2 });
+  // Retrieve new cities and timetype
+  var time = req.query.data2;
+  var cities = req.query.data1;
 
-    var json = JSON.stringify(obj);
+  // Transform into json
+  var obj = { type: time, cities }
+  var json = JSON.stringify(obj);
+  console.log(json)
 
-    var fs = require('fs');
-    fs.writeFile('/api/settings', json, 'utf8', callback);
-
-  } catch (err) {
-    res.writeHead(500);
-    res.end(err);
-    return;
-  }
+  // Write to file
+  var fs = require('fs');
+  fs.writeFile('./settings.json', json, function (error) {
+    if (error) {
+      res.end(error);
+      return;
+    } else {
+      res.send(json);
+    }
+  });
 });
 
 // RETRIEVING SETTINGS
 app.get('/api/settings', (req, res) => {
-  const fs = require("fs");
   fs.readFile("./settings.json", "utf8", (err, jsonString) => {
     if (err) {
       console.log("Error reading file from disk:", err);
