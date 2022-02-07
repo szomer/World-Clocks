@@ -1,17 +1,61 @@
 <link rel="stylesheet" href="/css/settings.css">
 
-<div id="settingsContent">
-    <p id="settingsTitle">Your Settings</p>
+<section id="settingsContent">
+    <p id="settingsTitle">Settings</p>
     <hr>
-
-    <div id="settings">
+    <section id="settingsLeft">
+        <div id="settingsLeftTitle">
+            Your Cities
+        </div>
+        <!-- Table -->
         <table id="settingsTable">
-            <tr>
+            <tr id="tableHeader">
                 <th>Id</th>
                 <th>City Name</th>
                 <th>Time Zone</th>
             </tr>
         </table>
-    </div>
+        <br><br>
+    </section>
 
-</div>
+    <section id="settingsRight">
+        <div id="settingsRightTitle">
+            Personalisation
+        </div>
+        <div id="settingsRightContent">
+            <p class="settingsSmallTitle">Time Display Type</p>
+            <!-- Switch -->
+            <input class="input" id="toggle" type="checkbox">
+            <label class="label" for="toggle">
+                <div class="switchLeft">
+                    Analog
+                </div>
+                <div class="switch">
+                    <span class="slider round"></span>
+                </div>
+                <div class="switchRight">
+                    Digital
+                </div>
+            </label>
+            <br>
+
+            <p class="settingsSmallTitle">Add City</p>
+            <!-- Search Bar -->
+            <div id="searchbar">
+                <form class="search" action="javascript:handleSearch()">
+                    <input id="searchString" type="text" placeholder="Search.." name="search">
+                    <button type="submit"><i class="fa fa-search"></i></button>
+                </form>
+                </div>
+                <!-- Display search results-->
+                
+                <div id="searchResults">
+
+                    <!--display city name, country-->
+
+                </div>
+
+
+        </div>
+    </section>
+</section>

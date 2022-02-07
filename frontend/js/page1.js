@@ -17,7 +17,7 @@ function populateTable() {
     // Add values to cells
     cell1.innerHTML = i;
     cell2.innerHTML = cities[i];
-    cell3.innerHTML = times[i];
+    cell3.innerHTML = times[i] + " UTC";
   }
 }
 
@@ -42,4 +42,26 @@ function setSettings() {
     // Request error
     console.log(error);
   });
+}
+
+// Handle the search request for city
+function handleSearch() {
+  var searchString = document.getElementById('searchString').value;
+  var resultDiv = document.getElementById('searchResults');
+  var resultHTML = "";
+  var arr = [["City1", "Country1"], ["City2", "Country2"]];
+
+  for (var i = 0; i < arr.length; i++) {
+    resultHTML = resultHTML.concat('<div class="resultItemList" onclick="addCity(' + i + ')">' + arr[i][0] + ', ' + arr[i][1] + '</div>');
+  }
+
+
+
+  resultDiv.innerHTML = resultHTML;
+
+
+}
+
+function addCity(cityId) {
+  console.log(cityId);
 }
