@@ -52,7 +52,7 @@ app.listen(port, () => {
 
 
 // RETRIEVING A SPECIFIC TIMEZONE
-app.get('/timezone', (req, res) => {
+app.get('/api/timezone', (req, res) => {
   try {
     // loop up the city that matches the string sent by the client
     var lookupCity = cityTimezones.lookupViaCity(req.query.city)
@@ -71,33 +71,31 @@ app.get('/timezone', (req, res) => {
 });
 
 // CHANGING SETTINGS FILE
-app.post('/config', (req, res) => {
-  var newCities = [];
+app.get('/api/config', (req, res) => {
+  try {
+    // Retrieve new cities
+    var data = req.query.cities;
+    var data2 = req.query.time;
 
-  var qs = require('querystring');
-  if (req.method == 'POST') {
-    var body = '';
+    var obj = {
+      table: []
+    };
+    obj.table.push({ data, data2 });
 
-    req.on('data', function (data) {
-      body += data;
+    var json = JSON.stringify(obj);
 
-      // Too much POST data, kill the connection!
-      // 1e6 === 1 * Math.pow(10, 6) === 1 * 1000000 ~~~ 1MB
-      if (body.length > 1e6)
-        req.connection.destroy();
-    });
+    var fs = require('fs');
+    fs.writeFile('/api/settings', json, 'utf8', callback);
 
-    req.on('end', function () {
-      var post = qs.parse(body);
-      console.log(post.city);
-    });
+  } catch (err) {
+    res.writeHead(500);
+    res.end(err);
+    return;
   }
-  // send the timezone string to to the client
-  res.send("received");
 });
 
 // RETRIEVING SETTINGS
-app.get('/settings', (req, res) => {
+app.get('/api/settings', (req, res) => {
   const fs = require("fs");
   fs.readFile("./settings.json", "utf8", (err, jsonString) => {
     if (err) {

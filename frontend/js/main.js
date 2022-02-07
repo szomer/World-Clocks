@@ -83,6 +83,7 @@ async function router() {
 
   } else if (route == '/partials/page1.html') {
     otherPage = true;
+    loadSettings();
 
   } else if (route == '/partials/page2.html') {
     otherPage = true;
@@ -103,7 +104,7 @@ function makeMenuChoiceActive(route) {
   }
 }
 
-// Generate html to be displayed
+// Generate html for homepage to be displayed
 function generateHTML() {
   contextHTML = '';
 
@@ -139,7 +140,7 @@ function getSettings() {
   // GET request
   $.ajax({
     type: 'GET', //type of request
-    url: 'http://127.0.0.1:3000/settings', //url to server
+    url: '/api/settings', //url to server
     contentType: 'application/json', //content type
 
   }).done(function (result) {
@@ -152,7 +153,6 @@ function getSettings() {
     cities = data.cities;
     timeType = data.type;
 
-    console.log('cities ' + cities);
   });
 
   if (cities.length < 1) {
@@ -160,27 +160,12 @@ function getSettings() {
   }
 }
 
-// Set settings to server
-function setSettings() {
-  // POST request
-  $.ajax({
-    type: 'POST', //type of request
-    url: 'http://127.0.0.1:3000/config', //url to server
-    data: { city: ['Vancouver', 'New York'] }, //parameter
-  }).done(function (result) {
-
-  }).fail(function (xhr, status, error) {
-    // Request error
-    console.log(error);
-  });
-}
-
 // Requesting data from server and display in table
 function getTimezone(lookupString, i) {
   // GET request
   $.ajax({
     type: 'GET', //type of request
-    url: 'http://127.0.0.1:3000/timezone', //url to server
+    url: '/api/timezone', //url to server
     contentType: 'application/json', //content type
     data: { city: lookupString }, //parameter
 

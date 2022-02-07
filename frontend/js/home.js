@@ -76,7 +76,6 @@ function loadClocks() {
 
       // Stop refreshing
       if ((timeType == 'Digital') || (otherPage)) {
-        console.log('stop analog')
         clearInterval(intervalAnalog);
         return;
       }

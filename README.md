@@ -4,6 +4,8 @@ Software Development for the Web
 
 25 January 2022
 
+Single Page Application served by a webserver on [**Node.js**](https://nodejs.org/en/) with the use of [**Express**](https://expressjs.com/).
+
 ---
 
 ## Running the website
