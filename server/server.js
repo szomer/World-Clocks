@@ -18,7 +18,7 @@
 // ---------------------------------------------------------
 
 
-// Modules
+// MODULES
 // Used for req, URL paths, set web app settings
 const express = require('express');
 // Used to load the HTML file [readFile()]
@@ -37,39 +37,80 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-// Portnumber
-// portnumber set in CMD -> set PORT=5000
+
+// Portnumber set in CMD -> set PORT=5000
 // If no portnumber set -> use PORT=3000
 const port = process.env.PORT || 3000;
 
-// Listen to port
+// Serve all files in the frontend folder
+app.use(express.static('../frontend'));
+
+// Start the webserver
 app.listen(port, () => {
   console.log(`Listening on port ${port}...`);  //Show on console
 });
 
-// ACCESSING http://localhost:3000/                         
-app.get('/', (req, res) => { //GET localhost:3000/
-  fs.readFile(__dirname + "/serverpage.html") //Load the HTML file
-    .then(contents => {
-      res.setHeader("Content-Type", "text/html"); //Set content type
-      res.writeHead(200); //Status code 200
-      res.end(contents);  //Send the HTML to client
-    })
-    .catch(err => { //In case of error
-      res.writeHead(500); //Status code 500
-      res.end(err);  //Send
-      return;
-    });
-});
 
 // RETRIEVING A SPECIFIC TIMEZONE
 app.get('/timezone', (req, res) => {
-  // loop up the city that matches the string sent by the client
-  var lookupCity = cityTimezones.lookupViaCity(req.query.city)
+  try {
+    // loop up the city that matches the string sent by the client
+    var lookupCity = cityTimezones.lookupViaCity(req.query.city)
 
-  // look up the time zone related to the found city name
-  const timezone = ct.getTimezone(lookupCity[0].timezone);
+    // look up the time zone related to the found city name
+    const timezone = ct.getTimezone(lookupCity[0].timezone);
 
+    // send the timezone string to to the client
+    res.send(timezone.utcOffsetStr);
+
+  } catch (err) { // In case of error
+    res.writeHead(500);
+    res.end(err);
+    return;
+  }
+});
+
+// CHANGING SETTINGS FILE
+app.post('/config', (req, res) => {
+  var newCities = [];
+
+  var qs = require('querystring');
+  if (req.method == 'POST') {
+    var body = '';
+
+    req.on('data', function (data) {
+      body += data;
+
+      // Too much POST data, kill the connection!
+      // 1e6 === 1 * Math.pow(10, 6) === 1 * 1000000 ~~~ 1MB
+      if (body.length > 1e6)
+        req.connection.destroy();
+    });
+
+    req.on('end', function () {
+      var post = qs.parse(body);
+      console.log(post.city);
+    });
+  }
   // send the timezone string to to the client
-  res.send(timezone.utcOffsetStr);
+  res.send("received");
+});
+
+// RETRIEVING SETTINGS
+app.get('/settings', (req, res) => {
+  const fs = require("fs");
+  fs.readFile("./settings.json", "utf8", (err, jsonString) => {
+    if (err) {
+      console.log("Error reading file from disk:", err);
+      return;
+    }
+    try {
+      const config = JSON.parse(jsonString);
+      console.log(config);
+      res.send(config);
+
+    } catch (err) {
+      console.log("Error parsing JSON string:", err);
+    }
+  });
 });

@@ -8,8 +8,8 @@ Software Development for the Web
 
 ## Running the website
 
-- Navigate with cmd/terminal to the server folder and start the server `node server.js`
-- Run index.html with live server extension from visual studio code
+1. Navigate with cmd/terminal to the server folder and start the server `node server.js`
+2. Open the webbrowser and browe to `localhost:3000`. Replace `3000` if another port is specified.
 
 ---
 
@@ -18,9 +18,9 @@ Software Development for the Web
 ### Grade 3
 
 - [ ] Create sketches of how you want the site to look graphically, not only wireframes but also the choice of color, font, layout in general should appear from the sketches. Add the sketches or links to them in you repository
-- [ ] Create a SPA (Single Page Application)-site with where you can keep track of local time in different cities around the world.
+- [x] Create a SPA (Single Page Application)-site with where you can keep track of local time in different cities around the world.
 - [ ] The user should both be able to choose from a list of 20 major cities in the world.
-- [ ] It should be possible to display clocks / times both digitally and analogously (ie with a traditional clock with hands).
+- [x] It should be possible to display clocks / times both digitally and analogously (ie with a traditional clock with hands).
 - [x] You must version handle your code with Git - create an open repository on GitHub. It will be the link to the repository your teacher uses when grading.
 
 ### Grade 4
