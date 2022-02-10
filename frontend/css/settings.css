@@ -9,7 +9,7 @@
   /* Title */
   #settingsTitle {
     text-align: left;
-    color:white;
+    color:var(--white);
     font-size: 22px;
     font-family: 'Bebas Neue', sans-serif;
   }
@@ -33,22 +33,22 @@
     font-size: 23px;
     font-family: 'Bebas Neue', sans-serif;
     text-align: center;
-    color: white;
+    color: var(--white);
   }
 
   .settingsSmallTitle{
   font-size: 18px;
   font-weight: bold;  
-  color: white;
+  color: var(--dark-medium);
   }
 
   /* Table */
   table {
     /* margin: 0 auto; */
     box-shadow: 0px 1px 10px 1px #00000084;
-    background-color: #292929;
+    background-color: var(--dark);
     text-align: center;
-    background-color: grey;
+    background-color: var(--dark-medium);
     font-size: 18px;
     font-family: 'Source Serif Pro', serif;
     width: 100%;
@@ -56,15 +56,15 @@
   }
   table, th, td {
     padding: 5px 15px;
-    border: 0px solid black;
+    border: 0px solid var(--black);
     border-collapse: collapse;
   }
   td {
-    color: #292929;
+    color: var(--dark);
   }
   #tableHeader {
-    background-color: rgba(0, 0, 0, 1);
-    color: white;
+    background-color: var(--dark);
+    color: var(--white);
   }
 
   #settingsRightContent{
@@ -83,7 +83,6 @@
 .input:checked + .label .switchLeft,
 .input:not(:checked) + .label .switchRight {
   pointer-events: all;
-  cursor: pointer;
 }
 .input {
   display: none;
@@ -102,14 +101,14 @@
 }
 .slider {
   position: absolute;
-  cursor: pointer;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #0de0dd;
+  background-color: var(--highlight);
   -webkit-transition: 0.4s;
   transition: 0.4s;
+  box-shadow: 0px 3px 15px 0px #0000003f;
 }
 .slider:before {
   position: absolute;
@@ -118,15 +117,15 @@
   width: 26px;
   left: 4px;
   bottom: 4px;
-  background-color: white;
+  background-color: var(--white);
   -webkit-transition: 0.4s;
   transition: 0.4s;
 }
 input:checked + .label .slider {
-  background-color: #0de0dd;
+  background-color: var(--highlight);
 }
 input:focus + .label .slider {
-  box-shadow: 0 0 1px #0de0dd;
+  box-shadow: 0 0 1px var(--highlight);
 }
 input:checked + .label .slider:before {
   -webkit-transform: translateX(26px);
@@ -143,7 +142,7 @@ input:checked + .label .slider:before {
   margin: 0 .5em;
   font-size: 23px;
   font-family: 'Bebas Neue', sans-serif;
-  color: white;
+  color: var(--white);
 }
 
 
@@ -156,23 +155,23 @@ input:checked + .label .slider:before {
 form.search input[type=text] {
   padding: 10px;
   font-size: 17px;
-  border: 1px solid black;
+  border: 1px solid var(--dark);
   float: left;
   width: 75%;
-  background: #f1f1f1;
+  background: var(--light);
   margin-left: 10px;
   font-family: 'Source Serif Pro', serif;
+  box-shadow: 0px 3px 15px 0px #0000003f;
 }
 form.search button {
   float: left;
   width: 15%;
   padding: 10px;
-  background: #0de0dd;
-  color: white;
+  background: var(--highlight);
+  color: var(--white);
   font-size: 17px;
-  border: 1px solid black;
+  border: 1px solid var(--dark);
   border-left: none;
-  cursor: pointer;
   background-image: url('/images/search.png');
 	background-repeat: no-repeat;
   background-position-x: 13px;
@@ -180,10 +179,27 @@ form.search button {
   background-size: 30px;
   height:43px;
   font-family: 'Source Serif Pro', serif;
+  box-shadow: 0px 3px 15px 0px #0000003f;
 } 
-/* form.search button:hover {
-  background-color: white;
+form.search button:hover {
+  float: left;
+  width: 15%;
+  padding: 10px;
+  background: var(--highlight-light);
+  color: var(--white);
+  font-size: 17px;
+  border: 1px solid var(--dark);
+  border-left: none;
+  background-image: url('/images/search.png');
+	background-repeat: no-repeat;
+  background-position-x: 13px;
+  background-position-y: 7px;
+  background-size: 30px;
+  height:43px;
+  font-family: 'Source Serif Pro', serif;
+  box-shadow: 0px 3px 15px 0px #0000003f;
 }
+
 /* Clear floats */
 form.search::after {
   content: "";
@@ -201,17 +217,15 @@ form.search::after {
   font-family: 'Source Serif Pro', serif;
   font-size: 18px;
   padding-bottom: 1px;
-  background-color: grey;
+  background-color: var(--dark-medium);
   line-height: 40px;
   padding-left: 10px;
-  border-bottom: 1px solid black;
-  color: #292929;
+  border-bottom: 1px solid var(--dark);
+  color: var(--dark);
 }
 .resultItemList:hover{
-  cursor: pointer;
-  background-color: white;
+  background-color: var(--highlight);
 }
 .resultItemList:active{
-  cursor: pointer;
-  background-color: #0de0dd;
+  background-color: var(--highlight-light);
 }

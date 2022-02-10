@@ -2,8 +2,6 @@
  font-family:'digital7';
  src: url('/resources/digital-7.ttf');
 }
-/* digital7, Bebas Neue, Elsie, Lobster Two, Obitron, Stint Ultra Condensed, Yanone Kaffeesatz */
-
 
 #clocksContent {
   padding-left: 25px;
@@ -16,19 +14,18 @@
   /* Title */
   #clocksTitle {
     text-align: left;
-    color:white;
+    color:var(--white);
     font-size: 22px;
     font-family: 'Bebas Neue', sans-serif;
   }
 
   /* Switch time type button */
   #timeType{
-    color: white;
+    color: var(--highlight-light);
     font-family: 'Bebas Neue', sans-serif;
   }
   #timeType:hover{
-    color: #0de0dd;
-    cursor: pointer;
+    color: var(--highlight-dark);
   }
 
   hr{
@@ -37,7 +34,7 @@
 
   /* Clock title*/
   h2{
-    color: white;
+    color: var(--white);
     text-align: center;
     padding:0px;
     margin:0px;
@@ -48,11 +45,11 @@
 
   /* Utc title */
   h3{
-    color: rgb(165, 165, 165);
+    color: var(--highlight-light);
     text-align: center;
     margin:0px;
     padding:0px;
-    font-weight: lighter;
+    font-weight: normal;
     font-size: 13px;
     font-family: sans-serif;
   }
@@ -88,11 +85,11 @@
     padding-right: 10px;
     line-height: 55px;
     width: 230px;
-    color: #292929;
+    color: var(--dark);
     text-align: center;
     font-size: 60px;
     font-family: 'digital7', monospace;
     letter-spacing: 7px;
-    background-color: grey;
+    background-color: var(--dark-medium);
     border-radius: 15px 15px 15px 15px;
   }
