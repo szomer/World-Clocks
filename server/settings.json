@@ -1,14 +1,1 @@
-{
-  "type": "Analog",
-  "cities": [
-    "Vancouver",
-    "Mexico City",
-    "New York",
-    "Brasilia",
-    "Lisbon",
-    "Berlin",
-    "Mumbai",
-    "Hong Kong",
-    "Tokyo"
-  ]
-}
+{"type":"Analog","cities":["Hong Kong0","Vancouver0","Moscow0","Mexico City0","Amsterdam0","Mumbai0"]}

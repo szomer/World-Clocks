@@ -1,67 +1,133 @@
+var ispaused = false;
+
 // Load settings contents
 function loadSettings() {
   populateTable();
+  setSwitch();
+
+  // Remove search results if search bar empty
+  const intervalSearch = setInterval(function () {
+    if (!(location.pathname == '/page1'))
+      clearInterval(intervalSearch);
+    if ((document.getElementById('searchString').value == "") && (ispaused == false))
+      document.getElementById("searchResults").innerHTML = " ";
+  }, 500);
 }
 
 // Add the cities and their timezone to the table
 function populateTable() {
   var table = document.getElementById("settingsTable");
 
-  for (var i = 0; i < cities.length; i++) {
+  // Clear table
+  for (var i = table.rows.length - 1; i > 0; i--) {
+    table.deleteRow(i);
+  }
+
+  // Populate table
+  for (var j = 0; j < cities.length; j++) {
     // Create new row and cells
-    var row = table.insertRow(i + 1);
+    var row = table.insertRow(j + 1);
     var cell1 = row.insertCell(0);
     var cell2 = row.insertCell(1);
     var cell3 = row.insertCell(2);
 
+    var temp = cities[j];
+    var len = temp.length - 1;
+    var c1 = temp.substring(0, len);
+
     // Add values to cells
-    cell1.innerHTML = i;
-    cell2.innerHTML = cities[i];
-    cell3.innerHTML = times[i] + " UTC";
+    cell1.innerHTML = j;
+    cell2.innerHTML = c1;
+    cell3.innerHTML = times[j] + " UTC";
   }
 }
 
-// Update new settings on server
-function setSettings() {
-  var arr = ['Vancouver', 'New York', 'Tokyo'];
-  var newTime = 'Analog';
-
-  // GET request
-  $.ajax({
-    type: 'GET', //type of request
-    url: '/api/config', //url to server
-    data: {
-      data1: (arr),
-      data2: newTime
-    },
-    // convert array to string
-  }).done(function (result) {
-    console.log(result);
-
-  }).fail(function (xhr, status, error) {
-    // Request error
-    console.log(error);
+function setSwitch() {
+  $(document).ready(function () {
+    if (preSetTimeType == 'Digital') {
+      $(':checkbox').each(function () { this.checked = !this.checked; });
+    }
   });
 }
 
 // Handle the search request for city
 function handleSearch() {
+  ispaused = false;
   var searchString = document.getElementById('searchString').value;
   var resultDiv = document.getElementById('searchResults');
-  var resultHTML = "";
-  var arr = [["City1", "Country1"], ["City2", "Country2"]];
 
-  for (var i = 0; i < arr.length; i++) {
-    resultHTML = resultHTML.concat('<div class="resultItemList" onclick="addCity(' + i + ')">' + arr[i][0] + ', ' + arr[i][1] + '</div>');
-  }
+  // GET request
+  $.ajax({
+    type: 'GET', //type of request
+    url: '/api/city', //url to server
+    contentType: 'application/json', //content type
+    data: { city: searchString }, //parameter
 
+  }).done(function (result) {
 
+  }).fail(function (xhr, status, error) {
+    // Request error
+    console.log(error);
 
-  resultDiv.innerHTML = resultHTML;
-
-
+  }).always(function (data) {
+    resultDiv.innerHTML = data;
+  });
 }
 
+// Add city to settings
 function addCity(cityId) {
-  console.log(cityId);
+  var cityName = document.getElementById('searchString').value;
+  document.getElementById('searchString').value = "";
+
+  // GET request
+  $.ajax({
+    type: 'GET', //type of request
+    url: '/api/addcity', //url to server
+    contentType: 'application/json', //content type
+    data: { city: cityName, id: cityId }, //parameter
+
+  }).done(function (result) {
+
+  }).fail(function (xhr, status, error) {
+    // Request error
+    console.log(error);
+  }).always(function (data) {
+  });
+
+  ispaused = true;
+  // Display confirm message
+  document.getElementById("searchResults").innerHTML = '<div id="confirmation">' + cityName + ' added to your cities.</div>';
+  // Update table
+  populateTable();
+}
+
+function handleSwitch() {
+  if ($('#toggle').is(":checked")) {
+    if (timeType == 'Analog') {
+      addTimeZone('Digital');
+      timeType = 'Digital';
+    }
+  } else {
+    if (timeType == 'Digital') {
+      addTimeZone('Analog');
+      timeType = 'Analog';
+    }
+  }
+  getSettings();
+}
+
+// Add timezone to settings
+function addTimeZone(zone) {
+  // GET request
+  $.ajax({
+    type: 'GET', //type of request
+    url: '/api/addtimezone', //url to server
+    contentType: 'application/json', //content type
+    data: { time: zone }, //parameter
+  }).done(function (result) {
+  }).fail(function (xhr, status, error) {
+    // Request error
+    console.log(error);
+  }).always(function (data) {
+  });
 }

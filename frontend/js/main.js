@@ -1,7 +1,7 @@
 var times = []; // Array of timezones
 var cities = []; // Array of city names
 var timeType; // Digital or Analog
-var otherPage;
+let preSetTimeType; // Pre set Time Type
 var contextHTML; // Store generated HTML content
 
 // Array for ditial clock properties
@@ -13,8 +13,10 @@ var canv = [];
 var rads = [];
 var ctxs = [];
 
+var rememberTimeType = true;
 
-// Retrieve settings from server
+
+// Get settings from server
 getSettings();
 
 // Route the page on load
@@ -34,6 +36,7 @@ document.querySelector('body').addEventListener('click', function (event) {
   // closest - a method all HTML-element have
   // that you can send a selector to to see if it matches
   // the element or any of its parents
+
   let aTag = event.target.closest('a');
 
   // do nothing if not click on an atag
@@ -78,15 +81,19 @@ async function router() {
   document.querySelector('#contentWrapper').innerHTML = content;
 
   if (route == '/partials/home.html') {
-    otherPage = false;
+    if (!rememberTimeType) {
+      timeType = preSetTimeType; 
+      rememberTimeType = true;
+    };
+    generateHTML();
     loadClocks();
 
   } else if (route == '/partials/page1.html') {
-    otherPage = true;
+    rememberTimeType = false;
     loadSettings();
 
   } else if (route == '/partials/page2.html') {
-    otherPage = true;
+    rememberTimeType = false;
   }
 }
 
@@ -114,13 +121,18 @@ function generateHTML() {
     // Set time for city
     getTimezone(cities[i], i);
 
+    var temp = cities[i];
+    var len = temp.length - 1;
+    var c1 = temp.substring(0, len);
+
+
     // Generate html for digital time
     if (timeType == 'Digital') {
 
       var dig = 'clockDigital' + i;
       digIds[i] = dig;
 
-      contextHTML = contextHTML.concat('<div class="blockDigital"><h2 id ="blockTitle' + i + '">' + cities[i] + '</h2><h3 id="blockUtc' + i + '">UTC ' + times[i] + '</h3><div id="clockDigital' + i + '" class="clockDigital"></div></div>');
+      contextHTML = contextHTML.concat('<div class="blockDigital"><h2 id ="blockTitle' + i + '">' + c1 + '</h2><h3 id="blockUtc' + i + '">UTC ' + times[i] + '</h3><div id="clockDigital' + i + '" class="clockDigital"></div></div>');
     }
     // Generate html for analog time
     else {
@@ -128,7 +140,7 @@ function generateHTML() {
       var can = 'clockcanvas' + i;
       canvasIds[i] = can;
 
-      contextHTML = contextHTML.concat('<div class="block"><h2 id ="blockTitle' + i + '">' + cities[i] + '</h2><h3 id="blockUtc' + i + '">UTC ' + times[i] + '</h3><canvas class="clockcanvas' + i + '"width="250" height="250"></canvas></div>')
+      contextHTML = contextHTML.concat('<div class="block"><h2 id ="blockTitle' + i + '">' + c1 + '</h2><h3 id="blockUtc' + i + '">UTC ' + times[i] + '</h3><canvas class="clockcanvas' + i + '"width="250" height="250"></canvas></div>')
     }
   }
 
@@ -151,8 +163,8 @@ function getSettings() {
 
   }).always(function (data) {
     cities = data.cities;
-    timeType = data.type;
-
+    preSetTimeType = data.type;
+    timeType = preSetTimeType;
   });
 
   if (cities.length < 1) {
@@ -177,6 +189,7 @@ function getTimezone(lookupString, i) {
 
   }).always(function (data) {
     // Response data from server
+
     var r = data.substr(0, 3);
     times[i] = parseInt(r);
   });

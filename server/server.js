@@ -29,6 +29,7 @@ const path = require('path');
 
 const ct = require('countries-and-timezones');
 const cityTimezones = require('city-timezones');
+const { off, send } = require('process');
 
 
 // Create the web app with express
@@ -53,12 +54,18 @@ app.listen(port, () => {
 
 // RETRIEVING A SPECIFIC TIMEZONE
 app.get('/api/timezone', (req, res) => {
+
   try {
+    var c = req.query.city; //Amsterdam0
+    var len = c.length - 1; //9
+    var c1 = c.substring(0, len); //Amsterdam
+    var c2 = c.substring(len, len + 1); //0
+
     // Loop up the city that matches the string sent by the client
-    var lookupCity = cityTimezones.lookupViaCity(req.query.city)
+    var lookupCity = cityTimezones.lookupViaCity(c1);
 
     // Look up the time zone related to the found city name
-    const timezone = ct.getTimezone(lookupCity[0].timezone);
+    const timezone = ct.getTimezone(lookupCity[c2].timezone);
 
     // Send the timezone string to to the client
     res.send(timezone.utcOffsetStr);
@@ -70,28 +77,36 @@ app.get('/api/timezone', (req, res) => {
   }
 });
 
-// CHANGING SETTINGS FILE
-app.get('/api/config', (req, res) => {
+// CHECK FOR CITY
+app.get('/api/city', (req, res) => {
+  try {
+    // Loop up the city that matches the string sent by the client
+    var lookupCity = cityTimezones.lookupViaCity(req.query.city);
 
-  // Retrieve new cities and timetype
-  var time = req.query.data2;
-  var cities = req.query.data1;
+    resultHTML = "";
 
-  // Transform into json
-  var obj = { type: time, cities }
-  var json = JSON.stringify(obj);
-  console.log(json)
+    if (lookupCity.length > 0) {
+      for (var i = 0; i < lookupCity.length; i++) {
 
-  // Write to file
-  var fs = require('fs');
-  fs.writeFile('./settings.json', json, function (error) {
-    if (error) {
-      res.end(error);
-      return;
-    } else {
-      res.send(json);
+        // Look up the time zone related to the found city name
+        const timezone = ct.getTimezone(lookupCity[i].timezone);
+
+        var d1 = lookupCity[i].city;
+        var d2 = lookupCity[i].country;
+        var d3 = timezone.utcOffsetStr;
+        d3 = parseInt((d3.substr(0, 3)));
+
+        resultHTML = resultHTML.concat('<div class="resultItemList" onclick="addCity(' + i + ')">' + d1 + ', ' + d2 + ', ' + d3 + ' UTC </div>');
+      }
     }
-  });
+    // Send result to client
+    res.send(resultHTML);
+
+  } catch (err) { // In case of error
+    res.writeHead(500);
+    res.end(err);
+    return;
+  }
 });
 
 // RETRIEVING SETTINGS
@@ -103,8 +118,116 @@ app.get('/api/settings', (req, res) => {
     }
     try {
       const config = JSON.parse(jsonString);
-      console.log(config);
       res.send(config);
+
+    } catch (err) {
+      console.log("Error parsing JSON string:", err);
+    }
+  });
+});
+
+// ADD A CITY TO SETTINGS
+app.get('/api/addcity', (req, res) => {
+
+  // New city name and arr location
+  var newCity = req.query.city;
+  var arrOffset = req.query.id;
+
+  // Split the offset from the name
+  var lookupCity = cityTimezones.lookupViaCity(newCity);
+  var d1 = lookupCity[arrOffset].city;
+  d1 = d1.concat(arrOffset);
+
+  var t;
+  var arr = [];
+
+  // Append d1 to json
+  var fs = require('fs');
+  fs.readFile("./settings.json", "utf8", (err, jsonString) => {
+    if (err) {
+      console.log("Error reading file from disk:", err);
+      return;
+    }
+    try {
+      // Retrieve settings file variables
+      const config = JSON.parse(jsonString);
+      t = config.type;
+      arr = config.cities;
+
+      // Add new city to array
+      arr.push(d1);
+      // Check if type is defined
+      if (t == null) { t = "Analog"; }
+
+      // Remove duplicates
+      cities = arr.filter(function (item, pos, self) {
+        return self.indexOf(item) == pos;
+      });
+
+      // Transform into json
+      var obj = { type: t, cities }
+      var json = JSON.stringify(obj);
+
+      // Write to file
+      var fs = require('fs');
+      fs.writeFile('./settings.json', json, function (error) {
+
+      });
+
+    } catch (err) {
+      console.log("Error parsing JSON string:", err);
+    }
+  });
+});
+
+// ADD TIMEZONE TO SETTINGS
+app.get('/api/addtimezone', (req, res) => {
+  var t = req.query.time;
+
+  var fs = require('fs');
+  fs.readFile("./settings.json", "utf8", (err, jsonString) => {
+    if (err) {
+      console.log("Error reading file from disk:", err);
+      return;
+    }
+    try {
+
+      // Retrieve settings file variables
+      const config = JSON.parse(jsonString);
+      arr = config.cities;
+
+      // Remove duplicates
+      cities = arr.filter(function (item, pos, self) {
+        return self.indexOf(item) == pos;
+      });
+
+      // Transform into json
+      var obj = { type: t, cities }
+      var json = JSON.stringify(obj);
+
+      // Write to file
+      var fs = require('fs');
+      fs.writeFile('./settings.json', json, function (error) {
+      });
+
+    } catch (err) {
+      console.log("Error parsing JSON string:", err);
+    }
+  });
+});
+
+app.get('/api/currenttimezone', (req, res) => {
+  var fs = require('fs');
+  fs.readFile("./settings.json", "utf8", (err, jsonString) => {
+    if (err) {
+      console.log("Error reading file from disk:", err);
+      return;
+    }
+    try {
+      // send timezone
+      const config = JSON.parse(jsonString);
+      var t = config.type;
+      res.send(t);
 
     } catch (err) {
       console.log("Error parsing JSON string:", err);

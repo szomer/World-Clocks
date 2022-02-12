@@ -2,7 +2,6 @@
 /* Bebas Neue, Source Serif Pro */
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Source+Serif+Pro:ital,wght@0,300;0,400;0,700;1,400;1,700&display=swap');
 
-
 /* Set variables */
 :root {
   --highlight: #3C6E71;
@@ -35,7 +34,6 @@ body {
 	background-attachment: fixed;
 	background-size: cover;
 }
-
 
 /* Header Styling */
 header {
@@ -105,7 +103,6 @@ header {
 
   /* Sticky footer */
   flex: 1;
-  
 }
   /* Left section */
   #contentLeft {
@@ -133,7 +130,6 @@ header {
       padding: 0px;
     }
 
-
 /* Footer Styling */
 footer {
   background-color: var(--highlight);
@@ -147,14 +143,13 @@ footer {
   }
 
 
-/* Cursor */
+/* CURSOR */
 html,
 html *,
 body,
 body * {
   cursor: none;
 }
-
 .cursor-dot,
 .cursor-dot-outline {
   pointer-events: none;
@@ -166,13 +161,11 @@ body * {
   transform: translate(-50%, -50%);
   transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
 }
-
 .cursor-dot {
   width: 8px;
   height: 8px;
   background-color: rgba(46, 46, 46, 0.9);
 }
-
 .cursor-dot-outline {
   width: 35px;
   height: 35px;

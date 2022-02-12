@@ -11,7 +11,7 @@ function loadClocks() {
     const intervalDigital = setInterval(function () {
 
       // Stop refreshing
-      if ((timeType == 'Analog') || (otherPage)) {
+      if ((timeType == 'Analog') || (!(location.pathname == '/'))) {
         clearInterval(intervalDigital);
         return;
       }
@@ -27,7 +27,11 @@ function loadClocks() {
         var session = "AM";
 
         // Change hour based on timezone
-        h = (h + (times[x] - 1));
+        if (times[x] > 0) {
+          h = (h + (times[x])) - 1;
+        } else {
+          h = (h - (times[x])) - 1;
+        }
 
         // Set correct hour representation
         if (h == 0) {
@@ -75,7 +79,7 @@ function loadClocks() {
     const intervalAnalog = setInterval(function () {
 
       // Stop refreshing
-      if ((timeType == 'Digital') || (otherPage)) {
+      if ((timeType == 'Digital') || (!(location.pathname == '/'))) {
         clearInterval(intervalAnalog);
         return;
       }
@@ -146,17 +150,24 @@ function drawHand(ctx, pos, length, width, color) {
 
 // Change the time type analog/digital
 function changeTimeType() {
-
   if (timeType == 'Digital') {
-    document.getElementById('timeType').innerHTML = 'Analog';
-    timeType = 'Analog';
+    setAnalog();
   } else {
-    document.getElementById('timeType').innerHTML = 'Digital'
-    timeType = 'Digital'
+    setDigital();
   }
+}
 
-  // Generate HTML for clocks
+// Set clocks digital
+function setDigital() {
+  timeType = 'Digital';
+  document.getElementById('timeType').innerHTML = 'Digital'
   generateHTML();
-  // Load the clocks
+  loadClocks();
+}
+// Set clocks analog
+function setAnalog() {
+  timeType = 'Analog';
+  document.getElementById('timeType').innerHTML = 'Analog';
+  generateHTML();
   loadClocks();
 }

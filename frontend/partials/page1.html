@@ -25,35 +25,37 @@
         <div id="settingsRightContent">
             <p class="settingsSmallTitle">Time Display Type</p>
             <!-- Switch -->
-            <input class="input" id="toggle" type="checkbox">
-            <label class="label" for="toggle">
-                <div class="switchLeft">
-                    Analog
-                </div>
-                <div class="switch">
-                    <span class="slider round"></span>
-                </div>
-                <div class="switchRight">
-                    Digital
-                </div>
-            </label>
+            <form name="myform">
+                <input class="input" id="toggle" type="checkbox" onclick="javascript:handleSwitch()">
+                <label class="label" for="toggle">
+                    <div class="switchLeft">
+                        Analog
+                    </div>
+                    <div class="switch">
+                        <span class="slider round"></span>
+                    </div>
+                    <div class="switchRight">
+                        Digital
+                    </div>
+                </label>
+            </form>
             <br>
 
-            <p class="settingsSmallTitle">Add City</p>
+            <p class="settingsSmallTitle">Add a City</p>
             <!-- Search Bar -->
             <div id="searchbar">
                 <form class="search" action="javascript:handleSearch()">
-                    <input id="searchString" type="text" placeholder="Search.." name="search">
+                    <input id="searchString" type="text" placeholder="Search.." name="search" autofocus>
                     <button type="submit"><i class="fa fa-search"></i></button>
                 </form>
-                </div>
-                <!-- Display search results-->
-                
-                <div id="searchResults">
+            </div>
+            <!-- Display search results-->
 
-                    <!--display city name, country-->
+            <div id="searchResults">
 
-                </div>
+                <!--display city name, country-->
+
+            </div>
 
 
         </div>
