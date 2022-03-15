@@ -62,7 +62,7 @@
   border-radius: 50%;
   background-color: #3380B5;
   position: absolute;
-  top: 30%;
+  top: 40%;
   left: 67%;
   transform: translate(-50%, -50%);
   overflow: hidden;
@@ -71,6 +71,7 @@
 }
 /* Land */
 .earth:before {
+
   content: "";
   position: absolute;
   background: #85C567;
@@ -115,7 +116,7 @@
   position: absolute;
   background-color: #A5A5A5;
   position: absolute;
-  top: 30%;
+  top: 40%;
   left: 67%;
   transform: translate(-50%, -50%);
   overflow: auto;
@@ -142,7 +143,7 @@
   position: absolute;
   background-color: white;
   position: absolute;
-  top: 30%;
+  top: 40%;
   left: 67%;
   transform: translate(-50%, -50%);
   overflow: auto;

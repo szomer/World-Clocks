@@ -139,6 +139,7 @@ input:checked + .label .slider:before {
 /* SEARCH BAR */
 /* Style the search field */
 #searchbar{
+  max-width: 400px;
   position: relative;
 }
 form.search input[type=text] {
@@ -154,6 +155,7 @@ form.search input[type=text] {
 }
 form.search button {
   float: left;
+  max-width: 60px;
   width: 20%;
   padding: 10px;
   background: var(--highlight);
@@ -200,6 +202,7 @@ form.search::after {
 #searchResults{
   position: relative;
   width: 87%;
+  max-width: 320px;
   margin-left: 10.5px;
 }
 .resultItemList{

@@ -2,8 +2,7 @@
   padding-left: 40px;
   padding-right: 40px;
   padding-bottom: 60px;
-  min-width: 610px;
-  max-width: 1140px;
+  
 }
   /* Title */
   #settingsTitle {
@@ -145,6 +144,7 @@ input:checked + .label .slider:before {
 /* SEARCH BAR */
 /* Style the search field */
 #searchbar{
+  max-width: 500px;
   position: relative;
 }
 form.search input[type=text] {
@@ -161,6 +161,7 @@ form.search input[type=text] {
 form.search button {
   float: left;
   width: 15%;
+  max-width: 60px;
   padding: 10px;
   background: var(--highlight);
   color: var(--white);
@@ -204,6 +205,7 @@ form.search::after {
 
 /* SEARCH BAR RESULTS */
 #searchResults{
+  max-width: 455px;
   position: relative;
   width: 95.5%;
   margin-left: 10.5px;

@@ -60,7 +60,7 @@
   border-radius: 50%;
   background-color: #3380B5;
   position: absolute;
-  top: 30%;
+  top: 40%;
   left: 77%;
   transform: translate(-50%, -50%);
   overflow: hidden;
@@ -113,7 +113,7 @@
   position: absolute;
   background-color: #A5A5A5;
   position: absolute;
-  top: 30%;
+  top: 40%;
   left: 77%;
   transform: translate(-50%, -50%);
   overflow: auto;
@@ -140,7 +140,7 @@
   position: absolute;
   background-color: white;
   position: absolute;
-  top: 30%;
+  top: 40%;
   left: 77%;
   transform: translate(-50%, -50%);
   overflow: auto;
