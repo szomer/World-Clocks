@@ -33,5 +33,5 @@ Single Page Application served by a webserver on [**Node.js**](https://nodejs.or
 ### Grade 5
 
 - [x] Includes names and time zones for at least 50 major world cities from a json file or from an open API for this (if you can find one).
-- [ ] The site must be responsive - ie. work and look good on different screen sizes (from mobile to larger computer screens).
+- [x] The site must be responsive - ie. work and look good on different screen sizes (from mobile to larger computer screens).
 - [x] Continuous commits should have been made to git with good titles and/or desriptions of each commit.
