@@ -1,0 +1,52 @@
+@media only screen and (max-width: 800px) {
+    #earth {
+        display: none;
+    }
+}
+
+
+#aboutContent {
+  padding-left: 25px;
+  padding-right: 25px;
+  padding-bottom: 30px;
+}
+
+  /* Title */
+  #aboutTitle {
+    text-align: left;
+    color:var(--white);
+    font-size: 22px;
+    font-family: 'Bebas Neue', sans-serif;
+  }
+  hr{
+    margin-bottom: 20px;
+  }
+
+  /* ABOUT TEXT SECTION */
+  #about{
+    min-width: 10px;
+  }
+    #aboutText{
+      color: var(--white);
+      text-align: left;
+      font-size: 18px;
+      font-family: 'Source Serif Pro', serif;
+      margin-bottom: 40px;
+    }
+    #aboutUl{
+      text-decoration: none;
+      list-style-type: disc;
+    }
+    .aboutLi{
+      color: var(--white);
+      text-align: left;
+      font-size: 18px;
+      font-family: 'Source Serif Pro', serif;
+    }
+    #gitLink{
+      color: var(--highlight-light);
+      text-decoration: none;
+    }
+    #gitLink:hover{
+      color: var(--highlight-dark);
+    }

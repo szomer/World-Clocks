@@ -1,7 +1,9 @@
 #aboutContent {
-  padding-left: 25px;
-  padding-right: 25px;
+  padding-left: 40px;
+  padding-right: 40px;
   padding-bottom: 30px;
+  min-width: 610px;
+  max-width: 1140px;
 }
 
   /* Title */
@@ -15,7 +17,7 @@
   hr{
     margin-bottom: 50px;
   }
-  #aboutHr{
+   #aboutHr{
     width: 57%; 
     float:left;
   }
@@ -61,7 +63,7 @@
   background-color: #3380B5;
   position: absolute;
   top: 30%;
-  left: 77%;
+  left: 67%;
   transform: translate(-50%, -50%);
   overflow: hidden;
   z-index: 2;
@@ -75,7 +77,7 @@
   height: 30px;
   width: 75px;
   left: 0;
-  top: 40px;
+  top: 50px;
   display: block;
   border-radius: 40px;
   -webkit-animation: rotateElement linear 25s infinite;
@@ -90,7 +92,7 @@
   height: 20px;
   width: 60px;
   left: 0px;
-  top: 40px;
+  top: 50px;
   display: block;
   border-radius: 40px;
   -webkit-animation: rotateElement linear 15s infinite;
@@ -114,7 +116,7 @@
   background-color: #A5A5A5;
   position: absolute;
   top: 30%;
-  left: 77%;
+  left: 67%;
   transform: translate(-50%, -50%);
   overflow: auto;
   z-index: 10;
@@ -134,14 +136,14 @@
   box-shadow: -4px 3px 0 -1px gray, 4px 2px 0 -1px gray, -2px -6px 0 -1px gray;
 }
 .stars {
-  height: 5px;
-  width: 5px;
+  height: 10px;
+  width: 10px;
   border-radius: 50%;
   position: absolute;
   background-color: white;
   position: absolute;
   top: 30%;
-  left: 77%;
+  left: 67%;
   transform: translate(-50%, -50%);
   overflow: auto;
   z-index: 1;

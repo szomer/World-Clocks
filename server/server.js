@@ -51,7 +51,6 @@ app.listen(port, () => {
   console.log(`Listening on port ${port}...`);  //Show on console
 });
 
-
 // RETRIEVING A SPECIFIC TIMEZONE
 app.get('/api/timezone', (req, res) => {
 

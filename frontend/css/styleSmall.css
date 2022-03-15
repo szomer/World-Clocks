@@ -52,18 +52,17 @@ header {
       text-align: left;
       padding: 5px;
       position: relative;
-      margin-top: -80px;
+      margin-top: -61px;
       width: fit-content;
     }
       #icon{
-        height:70px;
+        height: 40px;
       }
     /* Navigation menu */
     #navigation {
       text-align: center;
-      height: 70px;
-      padding-top: 12px;
-      min-width: 740px;    
+      padding-top: 10px;
+      margin-left: 80px;
       background-color: var(--highlight);
     }
       ul {
@@ -84,7 +83,7 @@ header {
       li a {
         display: block;
         text-align: center;
-        padding: 14px 16px;
+        padding: 14px 0px;
         height: 60px;
         color: var(--dark);
         text-decoration: none;
@@ -107,7 +106,7 @@ header {
   /* Left section */
   #contentLeft {
     float: left;
-    width: 10%;
+    width: 5%;
     overflow: hidden;
     min-width: 5px;
     min-height: 1px;
@@ -115,7 +114,7 @@ header {
   /* Main Section */
   main {
     padding: 0px;
-    width: 80%;
+    width: 90%;
     overflow: hidden;
     background-color: rgba(53,53,53,0.9);
     border-left: solid 2px;
@@ -141,33 +140,3 @@ footer {
   #footerWrapper {
     text-align: center;
   }
-
-
-/* CURSOR */
-html,
-html *,
-body,
-body * {
-  cursor: none;
-}
-.cursor-dot,
-.cursor-dot-outline {
-  pointer-events: none;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  border-radius: 50%;
-  opacity: 0;
-  transform: translate(-50%, -50%);
-  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
-}
-.cursor-dot {
-  width: 8px;
-  height: 8px;
-  background-color: rgba(46, 46, 46, 0.9);
-}
-.cursor-dot-outline {
-  width: 35px;
-  height: 35px;
-  background-color: rgba(255, 255, 255, 0.363);
-}

@@ -107,7 +107,7 @@ header {
   /* Left section */
   #contentLeft {
     float: left;
-    width: 10%;
+    width: 20%;
     overflow: hidden;
     min-width: 5px;
     min-height: 1px;
@@ -115,7 +115,7 @@ header {
   /* Main Section */
   main {
     padding: 0px;
-    width: 80%;
+    width: 60%;
     overflow: hidden;
     background-color: rgba(53,53,53,0.9);
     border-left: solid 2px;
