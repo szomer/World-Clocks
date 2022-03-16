@@ -24,13 +24,13 @@ function populateTable() {
   }
 
   // If timezones are not defined get settings froms server
-  if(times.length == 0){
+  if (times.length == 0) {
     for (var i = 0; i < cities.length; i++) {
       getTimezone(cities[i], i);
     }
   }
 
-  setTimeout(() =>{
+  setTimeout(() => {
     // Populate table
     for (var j = 0; j < cities.length; j++) {
       // Create new row and cells
@@ -106,10 +106,17 @@ function addCity(cityId) {
 
   ispaused = true;
   // Display confirm message
-  document.getElementById("searchResults").innerHTML = '<div id="confirmation">' + cityName + ' added to your cities.</div>';
+  document.getElementById("searchResults").innerHTML = '<div id="confirmation"> Adding ' + cityName + ' to your cities...</div>';
+
   // Update table
-  populateTable();
+  getSettings();
+  for (var i = 0; i < cities.length; i++) {
+    getTimezone(cities[i], i);
+  }
+
+  setTimeout(() => {location.reload(true); },1000);
 }
+
 
 // Handle switch state changes
 function handleSwitch() {
@@ -124,7 +131,7 @@ function handleSwitch() {
       timeType = 'Analog';
     }
   }
-  getSettings();
+  setTimeout(() => { getSettings(); }, 500);
 }
 
 // Add timezone to settings

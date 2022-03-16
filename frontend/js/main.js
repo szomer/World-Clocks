@@ -192,5 +192,6 @@ function getTimezone(lookupString, i) {
 
     var r = data.substr(0, 3);
     times[i] = parseInt(r);
+    return;
   });
 }
