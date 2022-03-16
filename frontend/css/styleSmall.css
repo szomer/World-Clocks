@@ -140,3 +140,11 @@ footer {
   #footerWrapper {
     text-align: center;
   }
+
+#errorpage{
+  color: var(--white);
+  font-family: 'Source Serif Pro', serif;
+  text-align: center;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}

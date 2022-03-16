@@ -233,3 +233,13 @@ app.get('/api/currenttimezone', (req, res) => {
     }
   });
 });
+
+app.all('/partials/*', (req, res) => {
+  res.set('Content-Type', 'text/html');
+  res.sendFile(path.join(__dirname, '../frontend', 'partials', '404.html'));
+});
+
+app.all('*', (req, res) => {
+  res.set('Content-Type', 'text/html');
+  res.sendFile(path.join(__dirname, '../frontend', 'index.html'));
+});

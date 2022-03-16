@@ -171,3 +171,11 @@ body * {
   height: 35px;
   background-color: rgba(255, 255, 255, 0.363);
 }
+
+#errorpage{
+  color: var(--white);
+  font-family: 'Source Serif Pro', serif;
+  text-align: center;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
