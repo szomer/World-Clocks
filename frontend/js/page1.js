@@ -23,25 +23,35 @@ function populateTable() {
     table.deleteRow(i);
   }
 
-  // Populate table
-  for (var j = 0; j < cities.length; j++) {
-    // Create new row and cells
-    var row = table.insertRow(j + 1);
-    var cell1 = row.insertCell(0);
-    var cell2 = row.insertCell(1);
-    var cell3 = row.insertCell(2);
-
-    var temp = cities[j];
-    var len = temp.length - 1;
-    var c1 = temp.substring(0, len);
-
-    // Add values to cells
-    cell1.innerHTML = j;
-    cell2.innerHTML = c1;
-    cell3.innerHTML = times[j] + " UTC";
+  // If timezones are not defined get settings froms server
+  if(times.length == 0){
+    for (var i = 0; i < cities.length; i++) {
+      getTimezone(cities[i], i);
+    }
   }
+
+  setTimeout(() =>{
+    // Populate table
+    for (var j = 0; j < cities.length; j++) {
+      // Create new row and cells
+      var row = table.insertRow(j + 1);
+      var cell1 = row.insertCell(0);
+      var cell2 = row.insertCell(1);
+      var cell3 = row.insertCell(2);
+
+      var temp = cities[j];
+      var len = temp.length - 1;
+      var c1 = temp.substring(0, len);
+
+      // Add values to cells
+      cell1.innerHTML = j;
+      cell2.innerHTML = c1;
+      cell3.innerHTML = times[j] + " UTC";
+    }
+  }, 500);
 }
 
+// Set the switch to the correct option
 function setSwitch() {
   $(document).ready(function () {
     if (preSetTimeType == 'Digital') {
@@ -101,6 +111,7 @@ function addCity(cityId) {
   populateTable();
 }
 
+// Handle switch state changes
 function handleSwitch() {
   if ($('#toggle').is(":checked")) {
     if (timeType == 'Analog') {

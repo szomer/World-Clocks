@@ -55,10 +55,10 @@ app.listen(port, () => {
 app.get('/api/timezone', (req, res) => {
 
   try {
-    var c = req.query.city; //Amsterdam0
-    var len = c.length - 1; //9
-    var c1 = c.substring(0, len); //Amsterdam
-    var c2 = c.substring(len, len + 1); //0
+    var c = req.query.city; //string = Amsterdam0
+    var len = c.length - 1; //get length of 9
+    var c1 = c.substring(0, len); //string = Amsterdam
+    var c2 = c.substring(len, len + 1); //string = 0
 
     // Loop up the city that matches the string sent by the client
     var lookupCity = cityTimezones.lookupViaCity(c1);
