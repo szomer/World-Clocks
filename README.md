@@ -8,6 +8,28 @@ Single Page Application served by a webserver on [**Node.js**](https://nodejs.or
 
 ---
 
+## Screenshots of the App
+
+![Alt text](img/clocks1.JPG?raw=true "Home page - Analog")
+_The Home Page with Analog Clocks_
+
+---
+
+![Alt text](img/clocks2.JPG?raw=true "Home page - Digital")
+_The Home Page with Digial Clocks_
+
+---
+
+![Alt text](img/settings1.JPG?raw=true "Settings page")
+_The Settings Page_
+
+---
+
+![Alt text](img/about.JPG?raw=true "About page")
+_The About Page_
+
+---
+
 ## Running the website
 
 1. Navigate with cmd/terminal to the server folder and start the server `node server.js`
@@ -15,7 +37,7 @@ Single Page Application served by a webserver on [**Node.js**](https://nodejs.or
 
 ---
 
-## Lab Requirements
+## Project Requirements
 
 ### Grade 3
 
